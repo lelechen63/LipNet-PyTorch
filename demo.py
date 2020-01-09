@@ -68,7 +68,7 @@ def output_video(p, txt, dst, audio_dir):
     cmd = "ffmpeg -y -i {}/%d.jpg -r 25 \'{}\'".format(p, dst)
     os.system(cmd)
     # add audio
-    command = 'ffmpeg -i ' + dst  + ' -i ' + audio_dir + ' -vcodec copy  -acodec copy -y  ' + dst.replace('.mp4','.mov')
+    cmd = 'ffmpeg -i ' + dst  + ' -i ' + audio_dir + ' -vcodec copy  -acodec copy -y  ' + dst.replace('.mp4','.mov')
     os.system(cmd)
 
     
