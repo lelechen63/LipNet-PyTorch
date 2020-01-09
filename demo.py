@@ -49,7 +49,7 @@ def get_position(size, padding=0.25):
 def cal_area(anno):
     return (anno[:,0].max() - anno[:,0].min()) * (anno[:,1].max() - anno[:,1].min()) 
 
-def output_video(p, txt, dst):
+def output_video(p, txt, audio_dir, dst):
     files = os.listdir(p)
     files = sorted(files, key=lambda x: int(os.path.splitext(x)[0]))
 
@@ -67,7 +67,11 @@ def output_video(p, txt, dst):
     
     cmd = "ffmpeg -y -i {}/%d.jpg -r 25 \'{}\'".format(p, dst)
     os.system(cmd)
+    # add audio
+    command = 'ffmpeg -i ' + dst  + ' -i ' + audio_dir + ' -vcodec copy  -acodec copy -y  ' + dst.replace('.mp4','.mov')
+    os.system(cmd)
 
+    
 def transformation_from_points(points1, points2):
     points1 = points1.astype(np.float64)
     points2 = points2.astype(np.float64)
