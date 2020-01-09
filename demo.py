@@ -49,7 +49,7 @@ def get_position(size, padding=0.25):
 def cal_area(anno):
     return (anno[:,0].max() - anno[:,0].min()) * (anno[:,1].max() - anno[:,1].min()) 
 
-def output_video(p, txt, audio_dir, dst):
+def output_video(p, txt, dst, audio_dir):
     files = os.listdir(p)
     files = sorted(files, key=lambda x: int(os.path.splitext(x)[0]))
 
@@ -162,7 +162,7 @@ if(__name__ == '__main__'):
     y = model(video[None,...].cuda())
     txt = ctc_decode(y[0])
     
-    output_video(img_p, txt, sys.argv[2])
+    output_video(img_p, txt, sys.argv[2], sys.argv[3])
     
     shutil.rmtree(img_p)
     
